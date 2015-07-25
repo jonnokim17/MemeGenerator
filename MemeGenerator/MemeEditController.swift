@@ -17,28 +17,21 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
 
-    var memedImage: UIImage?
-
+    var meme: Meme?
     var imagePicker = UIImagePickerController()
+
+    let defaultTopText = "TOP"
+    let defaultBottomText = "BOTTOM"
+
+    let memeTextAttributes = [
+        NSStrokeColorAttributeName : UIColor.blackColor(),
+        NSForegroundColorAttributeName : UIColor.whiteColor(),
+        NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 38)!,
+        NSStrokeWidthAttributeName : 3.0
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let memeTextAttributes = [
-            NSStrokeColorAttributeName : UIColor.blackColor(),
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
-            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 38)!,
-            NSStrokeWidthAttributeName : 3.0
-        ]
-
-        //TODO: change the text color to WHITE
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = .Center
-        topTextField.text = "TOP"
-
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = .Center
-        bottomTextField.text = "BOTTOM"
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -46,6 +39,15 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
         cameraBarButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
         subscribeToKeyboardHide()
+
+        //TODO: change the text color to WHITE
+        topTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = .Center
+        topTextField.text = defaultTopText
+
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.textAlignment = .Center
+        bottomTextField.text = defaultBottomText
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -69,16 +71,19 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
 
     @IBAction func onCamerButton(sender: UIBarButtonItem) {
+        imagePicker.delegate = self
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .Camera
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 
     @IBAction func onShareBarButton(sender: UIBarButtonItem) {
-        let memedImage = generateMemedImage()
-        let controller = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        //TODO: fix image capture bug when keyboard is present
+
+        saveMeme()
+        let controller = UIActivityViewController(activityItems: [meme!.memedImage!], applicationActivities: nil)
         presentViewController(controller, animated: true) { () -> Void in
-            self.saveMeme()
+            //TODO: Dismiss?
         }
     }
 
@@ -100,13 +105,13 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
     func textFieldDidBeginEditing(textField: UITextField) {
 
         if textField == topTextField {
-            if topTextField.text == "TOP" {
+            if topTextField.text == defaultTopText {
                 topTextField.text = ""
             }
         }
 
         if textField == bottomTextField {
-            if bottomTextField.text == "BOTTOM" {
+            if bottomTextField.text == defaultBottomText {
                 bottomTextField.text = ""
             }
         }
@@ -115,13 +120,13 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
     func textFieldDidEndEditing(textField: UITextField) {
         if textField == topTextField {
             if topTextField.text == "" {
-                topTextField.text = "TOP"
+                topTextField.text = defaultTopText
             }
         }
 
         if textField == bottomTextField {
             if bottomTextField.text == "" {
-                bottomTextField.text = "BOTTOM"
+                bottomTextField.text = defaultBottomText
             }
         }
     }
@@ -169,8 +174,9 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
 
     //Save Meme
     func saveMeme() {
-        var meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, image: chosenImage, memedImage: memedImage!)
-        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, image: chosenImage, memedImage: generateMemedImage())
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme!)
+
     }
 
     func generateMemedImage() -> UIImage {
@@ -182,13 +188,13 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame,
             afterScreenUpdates: true)
-        memedImage = UIGraphicsGetImageFromCurrentImageContext()
+        let memedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
         toolBar.hidden = false
         navigationController?.navigationBar.hidden = false
 
-        return memedImage!
+        return memedImage
     }
 }
 
