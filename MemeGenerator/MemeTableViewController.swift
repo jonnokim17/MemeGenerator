@@ -8,6 +8,8 @@
 
 import UIKit
 
+let reuseIdentifier = "customCell"
+
 class MemeTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var memes: [Meme]!
@@ -20,7 +22,6 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         memes = appDelegate.memes
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +34,7 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let customCell: MemeTableViewCell = tableView.dequeueReusableCellWithIdentifier("customCell", forIndexPath: indexPath) as! MemeTableViewCell
+        let customCell: MemeTableViewCell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! MemeTableViewCell
 
         let meme: Meme = memes[indexPath.row] as Meme
 
