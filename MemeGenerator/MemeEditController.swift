@@ -8,6 +8,10 @@
 
 import UIKit
 
+let defaultTopText = "TOP"
+let defaultBottomText = "BOTTOM"
+let emptyText = ""
+
 class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var cameraBarButton: UIBarButtonItem!
@@ -30,14 +34,13 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //TODO: change the text color to WHITE
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = .Center
-        topTextField.text = "TOP"
+        topTextField.text = defaultTopText
 
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = .Center
-        bottomTextField.text = "BOTTOM"
+        bottomTextField.text = defaultBottomText
 
         if ((meme) != nil) {
             topTextField.text = meme?.topText
@@ -88,7 +91,7 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
                     self.saveMeme()
                     self.dismissViewControllerAnimated(true, completion: nil)
                 } else {
-                    println("not successful")
+                    println("cancelled sharing")
                 }
             }
         }
@@ -119,28 +122,28 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
 
         if textField == topTextField {
-            if topTextField.text == "TOP" {
-                topTextField.text = ""
+            if topTextField.text == defaultTopText {
+                topTextField.text = emptyText
             }
         }
 
         if textField == bottomTextField {
-            if bottomTextField.text == "BOTTOM" {
-                bottomTextField.text = ""
+            if bottomTextField.text == defaultBottomText {
+                bottomTextField.text = emptyText
             }
         }
     }
 
     func textFieldDidEndEditing(textField: UITextField) {
         if textField == topTextField {
-            if topTextField.text == "" {
-                topTextField.text = "TOP"
+            if topTextField.text == emptyText {
+                topTextField.text = defaultTopText
             }
         }
 
         if textField == bottomTextField {
-            if bottomTextField.text == "" {
-                bottomTextField.text = "BOTTOM"
+            if bottomTextField.text == emptyText {
+                bottomTextField.text = defaultBottomText
             }
         }
     }

@@ -21,18 +21,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R0M-8c-qRG">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bay-So-8DX">
-                                <rect key="frame" x="16" y="105" width="568" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="mU4-Ug-YIg"/>
-                                </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="yPX-LF-E6p"/>
-                                </connections>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ciW-sB-7ui">
                                 <rect key="frame" x="16" y="461" width="568" height="47"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -63,25 +51,68 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="3zJ-6a-Ydk"/>
                                 </items>
                             </toolbar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uyp-jk-D5f">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0Ln-Q0-65e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0Ln-Q0-65e"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="0Ln-Q0-65e"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="mTB-jw-fEO"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="k4U-8s-cms" firstAttribute="top" secondItem="ciW-sB-7ui" secondAttribute="bottom" constant="48" id="Dv5-6a-09g"/>
-                            <constraint firstItem="bay-So-8DX" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="41" id="EPU-J1-3kf"/>
                             <constraint firstAttribute="trailing" secondItem="k4U-8s-cms" secondAttribute="trailing" id="FSk-rT-KUq"/>
                             <constraint firstItem="R0M-8c-qRG" firstAttribute="leading" secondItem="k4U-8s-cms" secondAttribute="leading" id="QuQ-Za-5C9"/>
+                            <constraint firstItem="uyp-jk-D5f" firstAttribute="leading" secondItem="ciW-sB-7ui" secondAttribute="leading" id="T4E-kU-bJs"/>
+                            <constraint firstItem="uyp-jk-D5f" firstAttribute="leading" secondItem="R0M-8c-qRG" secondAttribute="trailing" constant="-384" id="Wmo-WG-svo"/>
                             <constraint firstItem="R0M-8c-qRG" firstAttribute="trailing" secondItem="k4U-8s-cms" secondAttribute="trailing" id="XHW-hm-lSc"/>
                             <constraint firstItem="R0M-8c-qRG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Z4M-Kh-IIa"/>
+                            <constraint firstItem="uyp-jk-D5f" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="37" id="bis-nC-Cgf"/>
+                            <constraint firstItem="uyp-jk-D5f" firstAttribute="trailing" secondItem="ciW-sB-7ui" secondAttribute="trailing" id="cRn-bF-eVa"/>
                             <constraint firstItem="R0M-8c-qRG" firstAttribute="bottom" secondItem="k4U-8s-cms" secondAttribute="top" constant="44" id="d3o-L7-PXN"/>
                             <constraint firstItem="R0M-8c-qRG" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-64" id="gt9-BC-yYE"/>
                             <constraint firstItem="R0M-8c-qRG" firstAttribute="centerX" secondItem="ciW-sB-7ui" secondAttribute="centerX" id="hpJ-Om-cCV"/>
-                            <constraint firstItem="R0M-8c-qRG" firstAttribute="centerX" secondItem="bay-So-8DX" secondAttribute="centerX" id="mGI-sj-Gbr"/>
-                            <constraint firstItem="bay-So-8DX" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ocP-2J-EUH"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="k4U-8s-cms" secondAttribute="bottom" id="pQ7-ah-auc"/>
                             <constraint firstAttribute="trailing" secondItem="R0M-8c-qRG" secondAttribute="trailing" id="vLq-g6-G4B"/>
                             <constraint firstItem="k4U-8s-cms" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="x2r-pf-eTQ"/>
-                            <constraint firstItem="bay-So-8DX" firstAttribute="leading" secondItem="ciW-sB-7ui" secondAttribute="leading" id="yTM-fH-4SY"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="uyp-jk-D5f"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="T4E-kU-bJs"/>
+                                <exclude reference="Wmo-WG-svo"/>
+                                <exclude reference="bis-nC-Cgf"/>
+                                <exclude reference="cRn-bF-eVa"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="uyp-jk-D5f"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="T4E-kU-bJs"/>
+                                <include reference="Wmo-WG-svo"/>
+                                <include reference="bis-nC-Cgf"/>
+                                <include reference="cRn-bF-eVa"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Meme Generator" id="Vnj-R9-lzB">
                         <barButtonItem key="leftBarButtonItem" enabled="NO" systemItem="action" id="vrS-eO-ZMk">
@@ -102,7 +133,7 @@
                         <outlet property="chosenImage" destination="R0M-8c-qRG" id="pW6-ym-qgq"/>
                         <outlet property="shareButton" destination="vrS-eO-ZMk" id="Hnt-7H-zvs"/>
                         <outlet property="toolBar" destination="k4U-8s-cms" id="FlT-CD-CyX"/>
-                        <outlet property="topTextField" destination="bay-So-8DX" id="f9g-my-rX7"/>
+                        <outlet property="topTextField" destination="uyp-jk-D5f" id="ZL5-5d-3Gj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
