@@ -110,6 +110,10 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
     //UITextFieldDelegate
     func textFieldDidBeginEditing(textField: UITextField) {
 
+        if (meme != nil) {
+            shareButton.enabled = true
+        }
+
         if textField == topTextField {
             if topTextField.text == "TOP" {
                 topTextField.text = ""
@@ -121,8 +125,6 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
                 bottomTextField.text = ""
             }
         }
-
-        shareButton.enabled = true
     }
 
     func textFieldDidEndEditing(textField: UITextField) {
