@@ -81,12 +81,16 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
 
     @IBAction func onShareBarButton(sender: UIBarButtonItem) {
-        //TODO: fix image capture bug when keyboard is present
-
-        saveMeme()
-        let controller = UIActivityViewController(activityItems: [meme!.memedImage!], applicationActivities: nil)
+        let controller = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
         presentViewController(controller, animated: true) { () -> Void in
-            //TODO: Dismiss?
+            controller.completionWithItemsHandler = { activity, success, items, error in
+                if (success) {
+                    self.saveMeme()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                } else {
+                    println("not successful")
+                }
+            }
         }
     }
 

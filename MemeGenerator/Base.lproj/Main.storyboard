@@ -213,9 +213,6 @@
                                                     <exclude reference="tb5-a4-PYW"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="Tda-eu-QFb"/>
-                                                    <exclude reference="tf5-mE-TGp"/>
-                                                    <exclude reference="ztn-EJ-qMp"/>
                                                     <exclude reference="3QY-3t-Zla"/>
                                                     <exclude reference="ONS-Is-yX9"/>
                                                     <exclude reference="ZIq-no-S7G"/>
@@ -223,6 +220,9 @@
                                                     <exclude reference="4GY-YN-euj"/>
                                                     <exclude reference="Iz0-aj-6oj"/>
                                                     <exclude reference="NWa-A0-iSb"/>
+                                                    <exclude reference="Tda-eu-QFb"/>
+                                                    <exclude reference="tf5-mE-TGp"/>
+                                                    <exclude reference="ztn-EJ-qMp"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -232,9 +232,6 @@
                                                     <include reference="tb5-a4-PYW"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="Tda-eu-QFb"/>
-                                                    <include reference="tf5-mE-TGp"/>
-                                                    <include reference="ztn-EJ-qMp"/>
                                                     <include reference="3QY-3t-Zla"/>
                                                     <include reference="ONS-Is-yX9"/>
                                                     <include reference="ZIq-no-S7G"/>
@@ -242,6 +239,9 @@
                                                     <include reference="4GY-YN-euj"/>
                                                     <include reference="Iz0-aj-6oj"/>
                                                     <include reference="NWa-A0-iSb"/>
+                                                    <include reference="Tda-eu-QFb"/>
+                                                    <include reference="tf5-mE-TGp"/>
+                                                    <include reference="ztn-EJ-qMp"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -474,6 +474,7 @@
                         <viewControllerLayoutGuide type="bottom" id="qtx-qZ-JyT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4GH-5G-3q7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YWy-uK-JIl">
@@ -570,7 +571,7 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G29-Xw-dVm"/>
+        <segue reference="bga-Hz-PCX"/>
         <segue reference="eAc-LD-6fj"/>
     </inferredMetricsTieBreakers>
 </document>

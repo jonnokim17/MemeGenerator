@@ -19,8 +19,7 @@ class MemeDetailViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        memeImageView.image = selectedMeme.memedImage
-        
+        memeImageView.image = selectedMeme.memedImage        
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,9 +32,6 @@ class MemeDetailViewController: UIViewController {
             let navVC: UINavigationController = segue.destinationViewController as! UINavigationController
             let memeEditVC: MemeEditController = navVC.childViewControllers[0] as! MemeEditController
             memeEditVC.meme = selectedMeme
-//            memeEditVC.topTextToEdit = selectedMeme.topText
-//            memeEditVC.bottomTextToEdit = selectedMeme.bottomText
-//            memeEditVC.imageToEdit = selectedMeme.image
         }
     }
 }

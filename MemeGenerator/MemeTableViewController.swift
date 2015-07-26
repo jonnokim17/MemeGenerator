@@ -23,7 +23,6 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         memes = appDelegate.memes
-
         self.tableView.reloadData()
     }
 
