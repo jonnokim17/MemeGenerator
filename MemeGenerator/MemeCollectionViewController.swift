@@ -13,6 +13,7 @@ let collectionReuseID = "collectionCell"
 class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var memes: [Meme]!
+    @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,8 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         memes = appDelegate.memes
+
+        self.collectionView.reloadData()
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -43,5 +46,18 @@ class MemeCollectionViewController: UIViewController, UICollectionViewDelegate, 
         cell.memeImageView.image = meme.memedImage
 
         return cell
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "collectionSegue") {
+            let indexPath: AnyObject? = self.collectionView.indexPathsForSelectedItems().first
+            let indexPathRow = indexPath?.row
+            let selectedMeme = memes[indexPathRow!]
+
+            let navVC: UINavigationController = segue.destinationViewController as! UINavigationController
+            let memeDetailVC: MemeDetailViewController = navVC.childViewControllers[0] as! MemeDetailViewController
+            memeDetailVC.selectedMeme = selectedMeme
+            navVC.hidesBottomBarWhenPushed = true
+        }
     }
 }

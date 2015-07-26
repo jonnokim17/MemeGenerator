@@ -20,9 +20,6 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
     var meme: Meme?
     var imagePicker = UIImagePickerController()
 
-    let defaultTopText = "TOP"
-    let defaultBottomText = "BOTTOM"
-
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
         NSForegroundColorAttributeName : UIColor.whiteColor(),
@@ -32,6 +29,21 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        //TODO: change the text color to WHITE
+        topTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = .Center
+        topTextField.text = "TOP"
+
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.textAlignment = .Center
+        bottomTextField.text = "BOTTOM"
+
+        if ((meme) != nil) {
+            topTextField.text = meme?.topText
+            bottomTextField.text = meme?.bottomText
+            chosenImage.image = meme?.image
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -39,15 +51,6 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
         cameraBarButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
         subscribeToKeyboardHide()
-
-        //TODO: change the text color to WHITE
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = .Center
-        topTextField.text = defaultTopText
-
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = .Center
-        bottomTextField.text = defaultBottomText
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -87,11 +90,14 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
     }
 
+    @IBAction func onCancelBarButton(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
     //UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let imageData = UIImageJPEGRepresentation(image, 0.2)
-            chosenImage.image = UIImage(data: imageData)
+            chosenImage.image = image
         }
         shareButton.enabled = true
         dismissViewControllerAnimated(true, completion: nil)
@@ -105,28 +111,30 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
     func textFieldDidBeginEditing(textField: UITextField) {
 
         if textField == topTextField {
-            if topTextField.text == defaultTopText {
+            if topTextField.text == "TOP" {
                 topTextField.text = ""
             }
         }
 
         if textField == bottomTextField {
-            if bottomTextField.text == defaultBottomText {
+            if bottomTextField.text == "BOTTOM" {
                 bottomTextField.text = ""
             }
         }
+
+        shareButton.enabled = true
     }
 
     func textFieldDidEndEditing(textField: UITextField) {
         if textField == topTextField {
             if topTextField.text == "" {
-                topTextField.text = defaultTopText
+                topTextField.text = "TOP"
             }
         }
 
         if textField == bottomTextField {
             if bottomTextField.text == "" {
-                bottomTextField.text = defaultBottomText
+                bottomTextField.text = "BOTTOM"
             }
         }
     }
@@ -174,7 +182,7 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
 
     //Save Meme
     func saveMeme() {
-        meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, image: chosenImage, memedImage: generateMemedImage())
+        meme = Meme(topText: topTextField.text, bottomText: bottomTextField.text, image: chosenImage.image!, memedImage: generateMemedImage())
         (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme!)
 
     }

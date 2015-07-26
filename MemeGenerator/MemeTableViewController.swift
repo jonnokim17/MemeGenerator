@@ -13,6 +13,7 @@ let reuseIdentifier = "customCell"
 class MemeTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var memes: [Meme]!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,8 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         memes = appDelegate.memes
+
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,5 +46,18 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         customCell.bottomTextLabel.text = meme.bottomText
 
         return customCell
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "tableSegue") {
+            let indexPath = self.tableView.indexPathForSelectedRow()
+            let indexPathRow = indexPath?.row
+            let selectedMeme = memes[indexPathRow!]
+
+            let navVC: UINavigationController = segue.destinationViewController as! UINavigationController
+            let memeDetailVC: MemeDetailViewController = navVC.childViewControllers[0] as! MemeDetailViewController
+            memeDetailVC.selectedMeme = selectedMeme
+            navVC.hidesBottomBarWhenPushed = true
+        }
     }
 }
