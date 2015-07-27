@@ -28,7 +28,7 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
         NSStrokeColorAttributeName : UIColor.blackColor(),
         NSForegroundColorAttributeName : UIColor.whiteColor(),
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 38)!,
-        NSStrokeWidthAttributeName : 3.0
+        NSStrokeWidthAttributeName : -2.0
     ]
 
     override func viewDidLoad() {
@@ -173,13 +173,13 @@ class MemeEditController: UIViewController, UIImagePickerControllerDelegate, UIN
 
     func keyboardWillShow(notification: NSNotification) {
         if bottomTextField.editing == true {
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
 
     func keyboardWillHide(notification: NSNotification) {
         if bottomTextField.editing == true {
-            self.view.frame.origin.y += getKeyboardHeight(notification)
+            view.frame.origin.y = 0
         }
     }
 
